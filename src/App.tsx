@@ -4,6 +4,7 @@ import { questions } from './data/questions';
 import { LandingPage } from './components/LandingPage';
 import { StudentPortal } from './components/StudentPortal';
 import { ExaminerPortal } from './components/ExaminerPortal';
+import {supabase} from './lib/supabase';
 
 function App() {
   const [currentView, setCurrentView] = useState<View>('landing');
@@ -12,6 +13,11 @@ function App() {
   const handleNavigate = (view: View) => {
     setCurrentView(view);
   };
+
+  const fetchData = async () => {
+  const { data, error } = await supabase.from('your_table').select('*')
+  console.log(data, error)
+}
 
   const handleSubmitTest = (student: Student) => {
     setStudents(prev => [...prev, student]);
